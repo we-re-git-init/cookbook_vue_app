@@ -3,6 +3,8 @@
     <h1>{{ message }}</h1>
     <div v-for="recipe in recipes">
       <p>title:{{recipe.title}}</p>
+      <p>image url: {{recipe.image_url}}</p>
+      <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
       <hr>
     </div>
   </div>
