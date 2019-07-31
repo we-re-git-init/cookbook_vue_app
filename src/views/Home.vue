@@ -10,7 +10,13 @@
     <div v-for="recipe in recipes">
       <p>title:{{recipe.title}}</p>
       <p>image url: {{recipe.image_url}}</p>
-      <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
+      <img width="150px" v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
+      <p><button v-on:click="setRecipe(recipe)">Show more info</button></p>
+      <div v-if="currentRecipe === recipe">
+        <p>directions: {{ recipe.directions }}</p>
+        <p>ingredients {{ recipe.ingredients }}</p>
+        <p>prep time {{ recipe.prep_time }}</p>
+      </div>
       <hr>
     </div>
   </div>
@@ -31,7 +37,8 @@ export default {
       newRecipeDirections: "",
       newRecipeIngredients: "",
       newRecipeImageUrl: "",
-      newRecipePrepTime: ""
+      newRecipePrepTime: "",
+      currentRecipe: {}
     };
   },
   created: function() {
@@ -58,6 +65,12 @@ export default {
         console.log(response.data);
         this.recipes.push(response.data);
       })
+    },
+    setRecipe: function(theRecipe) {
+      console.log('setting the recipe');
+      // change the value of currentRecipe
+      console.log(theRecipe);
+      this.currentRecipe = theRecipe;
     }
   }
 };
