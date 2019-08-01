@@ -16,6 +16,13 @@
         <p>directions: {{ recipe.directions }}</p>
         <p>ingredients {{ recipe.ingredients }}</p>
         <p>prep time {{ recipe.prep_time }}</p>
+
+        <p>Title: <input type="text" v-model="recipe.title"></p>
+        <p>Directions: <input type="text" v-model="recipe.directions"></p>
+        <p>Ingredients: <input type="text" v-model="recipe.ingredients"></p>
+        <p>ImageUrl: <input type="text" v-model="recipe.image_url"></p>
+        <p>PrepTime: <input type="text" v-model="recipe.prep_time"></p>
+        <button v-on:click="updateRecipe(recipe)">Update the recipe</button>
       </div>
       <hr>
     </div>
@@ -71,6 +78,21 @@ export default {
       // change the value of currentRecipe
       console.log(theRecipe);
       this.currentRecipe = theRecipe;
+    },
+    updateRecipe: function(theRecipe) {
+      console.log('in updating recipe...');
+      // get the data the user entered
+      console.log(theRecipe);
+      // send that data to the api
+      axios.patch('/api/recipes/' + theRecipe.id, theRecipe).then(response => {
+        console.log(response.data);
+        // replace the old data on the html page with the new data from the db
+        theRecipe.title = response.data.title;
+        theRecipe.directions = response.data.directions;
+        theRecipe.prep_time = response.data.prep_time;
+        theRecipe.ingredients = response.data.ingredients;
+        theRecipe.image_url = response.data.image_url;
+      })
     }
   }
 };
