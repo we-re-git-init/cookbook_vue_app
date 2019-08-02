@@ -23,6 +23,12 @@
         <p>ImageUrl: <input type="text" v-model="recipe.image_url"></p>
         <p>PrepTime: <input type="text" v-model="recipe.prep_time"></p>
         <button v-on:click="updateRecipe(recipe)">Update the recipe</button>
+        <hr>
+        <hr>
+        <hr>
+        <button v-on:click="destroyRecipe(recipe)">Destroy the recipe</button>
+        <hr>
+        <hr>
       </div>
       <hr>
     </div>
@@ -84,7 +90,7 @@ export default {
       // get the data the user entered
       console.log(theRecipe);
       // send that data to the api
-      axios.patch('/api/recipes/' + theRecipe.id, theRecipe).then(response => {
+      axios.patch('/api/recipes/', theRecipe).then(response => {
         console.log(response.data);
         // replace the old data on the html page with the new data from the db
         theRecipe.title = response.data.title;
@@ -93,6 +99,20 @@ export default {
         theRecipe.ingredients = response.data.ingredients;
         theRecipe.image_url = response.data.image_url;
       })
+    },
+    destroyRecipe: function(theRecipe) {
+      console.log('destroying recipe');
+      // figure out which recipe I want to delete
+      console.log(theRecipe)
+      // tell the api i want to delete that recipe
+      axios.delete('/api/recipes/' + theRecipe.id).then(response => {
+        console.log(response.data);
+        // tell the html page to delete the recipe
+        // remove theRecipe from the recipes array
+        var index = this.recipes.indexOf(theRecipe);
+        this.recipes.splice(index, 1);
+      })
+
     }
   }
 };
