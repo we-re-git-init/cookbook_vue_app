@@ -1,11 +1,6 @@
 <template>
   <div class="home">
-    <p>Title: <input type="text" v-model="newRecipeTitle"></p>
-    <p>Directions: <input type="text" v-model="newRecipeDirections"></p>
-    <p>Ingredients: <input type="text" v-model="newRecipeIngredients"></p>
-    <p>ImageUrl: <input type="text" v-model="newRecipeImageUrl"></p>
-    <p>PrepTime: <input type="text" v-model="newRecipePrepTime"></p>
-    <button v-on:click="makeRecipe()">Make a new recipe</button>
+
     <div v-for="recipe in recipes">
       <p>title:{{recipe.title}}</p>
       <p>image url: {{recipe.image_url}}</p>
@@ -45,11 +40,6 @@ export default {
     return {
       message: "change.js!",
       recipes: [],
-      newRecipeTitle: "",
-      newRecipeDirections: "",
-      newRecipeIngredients: "",
-      newRecipeImageUrl: "",
-      newRecipePrepTime: "",
       currentRecipe: {}
     };
   },
@@ -61,25 +51,7 @@ export default {
     })
   },
   methods: {
-    makeRecipe: function() {
-      console.log('in make recipe');
-      // get some data
-      var newRecipe = {
-        title: this.newRecipeTitle,
-        ingredients: this.newRecipeIngredients,
-        directions: this.newRecipeDirections,
-        prep_time: this.newRecipePrepTime,
-        image_url: this.newRecipeImageUrl
-      }
-      // send that data to the api
-      axios.post('/api/recipes', newRecipe).then(response => {
-        console.log('in the callback for create')
-        console.log(response.data);
-        this.recipes.push(response.data);
-      }).catch(error => {
-        console.log(error.response.data);
-      })
-    },
+
     setRecipe: function(theRecipe) {
       console.log('setting the recipe');
       // change the value of currentRecipe
