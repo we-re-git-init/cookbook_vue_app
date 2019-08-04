@@ -2,11 +2,12 @@
   <div class="home">
 
     <div v-for="recipe in recipes">
+      <p>id:{{recipe.id}}</p>
       <p>title:{{recipe.title}}</p>
       <p>image url: {{recipe.image_url}}</p>
       <img width="150px" v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
-      <p><button v-on:click="setRecipe(recipe)">Show more info</button></p>
-      <div v-if="currentRecipe === recipe">
+      <router-link v-bind:to="`/recipes/${recipe.id}`">See more info</router-link>
+      <div v-if="false">
         <p>directions: {{ recipe.directions }}</p>
         <p>ingredients {{ recipe.ingredients }}</p>
         <p>prep time {{ recipe.prep_time }}</p>

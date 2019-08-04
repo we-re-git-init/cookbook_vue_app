@@ -1,12 +1,14 @@
 <template>
   <div class="recipes-new">
     <h1>{{ message }}</h1>
-    <p>Title: <input type="text" v-model="newRecipeTitle"></p>
-    <p>Directions: <input type="text" v-model="newRecipeDirections"></p>
-    <p>Ingredients: <input type="text" v-model="newRecipeIngredients"></p>
-    <p>ImageUrl: <input type="text" v-model="newRecipeImageUrl"></p>
-    <p>PrepTime: <input type="text" v-model="newRecipePrepTime"></p>
-    <button v-on:click="makeRecipe()">Make a new recipe</button>
+    <form v-on:submit.prevent="makeRecipe()">
+      <p>Title: <input type="text" v-model="newRecipeTitle"></p>
+      <p>Directions: <input type="text" v-model="newRecipeDirections"></p>
+      <p>Ingredients: <input type="text" v-model="newRecipeIngredients"></p>
+      <p>ImageUrl: <input type="text" v-model="newRecipeImageUrl"></p>
+      <p>PrepTime: <input type="text" v-model="newRecipePrepTime"></p>
+      <input type="submit" value="Create a new recipe">
+    </form>
   </div>
 </template>
 
