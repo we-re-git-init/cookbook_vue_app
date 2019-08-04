@@ -21,7 +21,7 @@
         <hr>
         <hr>
         <hr>
-        <button v-on:click="destroyRecipe(recipe)">Destroy the recipe</button>
+
         <hr>
         <hr>
       </div>
@@ -73,21 +73,8 @@ export default {
         theRecipe.ingredients = response.data.ingredients;
         theRecipe.image_url = response.data.image_url;
       })
-    },
-    destroyRecipe: function(theRecipe) {
-      console.log('destroying recipe');
-      // figure out which recipe I want to delete
-      console.log(theRecipe)
-      // tell the api i want to delete that recipe
-      axios.delete('/api/recipes/' + theRecipe.id).then(response => {
-        console.log(response.data);
-        // tell the html page to delete the recipe
-        // remove theRecipe from the recipes array
-        var index = this.recipes.indexOf(theRecipe);
-        this.recipes.splice(index, 1);
-      })
-
     }
+
   }
 };
 
