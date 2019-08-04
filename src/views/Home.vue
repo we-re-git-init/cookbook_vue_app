@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    {{recipes}}
     <h1>{{ message }}</h1>
     <p>Title: <input type="text" v-model="newRecipeTitle"></p>
     <p>Directions: <input type="text" v-model="newRecipeDirections"></p>
@@ -77,6 +78,8 @@ export default {
         console.log('in the callback for create')
         console.log(response.data);
         this.recipes.push(response.data);
+      }).catch(error => {
+        console.log(error.response.data);
       })
     },
     setRecipe: function(theRecipe) {
