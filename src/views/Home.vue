@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    {{recipes}}
-    <h1>{{ message }}</h1>
     <p>Title: <input type="text" v-model="newRecipeTitle"></p>
     <p>Directions: <input type="text" v-model="newRecipeDirections"></p>
     <p>Ingredients: <input type="text" v-model="newRecipeIngredients"></p>
