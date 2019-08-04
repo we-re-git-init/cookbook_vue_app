@@ -8,6 +8,7 @@
     <h1>ingredients: {{ recipe.ingredients }}</h1>
     <h1>prep_time: {{ recipe.prep_time }}</h1>
     <button v-on:click="destroyRecipe()">Destroy the recipe</button>
+    <router-link v-bind:to="`/recipes/${recipe.id}/edit`">Edit recipe</router-link>
   </div>
 </template>
 
