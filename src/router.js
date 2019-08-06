@@ -6,6 +6,7 @@ import RecipesNew from './views/RecipesNew.vue'
 import RecipesShow from './views/RecipesShow.vue'
 import RecipesEdit from './views/RecipesEdit.vue'
 import Signup from "./views/Signup.vue";
+import Login from "./views/Login.vue";
 
 Vue.use(Router)
 
@@ -22,6 +23,10 @@ export default new Router({
       path: '/recipes/new',
       name: 'recipes-new',
       component: RecipesNew
+    },
+    { path: "/login",
+      name: "login",
+      component: Login
     },
     {
       path: '/recipes/:id',
