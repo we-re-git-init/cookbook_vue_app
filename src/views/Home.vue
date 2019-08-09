@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-
-    <div v-for="recipe in recipes">
+    <p>Search: <input type="text" v-model="searchTerm"></p>
+    <div v-for="recipe in filterBy(recipes, searchTerm, 'title')">
       <p>id:{{recipe.id}}</p>
       <p>title:{{recipe.title}}</p>
       <p>image url: {{recipe.image_url}}</p>
@@ -17,12 +17,15 @@
 
 <script>
 import axios from "axios"
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "change.js!",
-      recipes: []
+      recipes: [],
+      searchTerm: ""
     };
   },
   created: function() {
