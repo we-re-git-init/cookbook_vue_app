@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <p>Search: <input type="text" v-model="searchTerm"></p>
+    <p>Search: <input type="text" v-model="searchTerm" list="titles"></p>
+    <datalist id="titles">
+      <option v-for="recipe in recipes">{{ recipe.title }}</option>
+    </datalist>
     <div v-for="recipe in filterBy(recipes, searchTerm, 'title')">
       <p>id:{{recipe.id}}</p>
       <p>title:{{recipe.title}}</p>
