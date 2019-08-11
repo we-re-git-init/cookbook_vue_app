@@ -8,19 +8,22 @@
 
     </datalist>
     <!-- <div v-for="recipe in orderBy(recipes, sortAttribute)"> -->
-    <div v-for="recipe in orderBy(filterBy(recipes, searchTerm, 'title'), sortAttribute)">
-      <p>id:{{recipe.id}}</p>
-      <p>title:{{recipe.title}}</p>
-      <p>prep_time:{{recipe.prep_time}}</p>
-      <p>image url: {{recipe.image_url}}</p>
-      <img width="150px" v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
-      <p><router-link v-bind:to="`/recipes/${recipe.id}`">See more info</router-link></p>
-      <hr>
-    </div>
+    <transition-group appear enter-active-class="animated flipInY delay-3s" leave-active-class="animated fadeOut">
+      <div v-for="recipe in orderBy(filterBy(recipes, searchTerm, 'title'), sortAttribute, sortOrder)" v-bind:key="recipe.id">
+        <p>id:{{recipe.id}}</p>
+        <p>title:{{recipe.title}}</p>
+        <p>prep_time:{{recipe.prep_time}}</p>
+        <p>image url: {{recipe.image_url}}</p>
+        <img width="150px" v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
+        <p><router-link v-bind:to="`/recipes/${recipe.id}`">See more info</router-link></p>
+        <hr>
+      </div>
+    </transition-group>
   </div>
 </template>
 
 <style>
+
 </style>
 
 <script>
@@ -34,7 +37,8 @@ export default {
       message: "change.js!",
       recipes: [],
       searchTerm: "",
-      sortAttribute: 'id'
+      sortAttribute: 'id',
+      sortOrder: 1
     };
   },
   created: function() {
@@ -46,8 +50,12 @@ export default {
   },
   methods: {
     setSortAttribute: function(attribute) {
-      console.log(attribute);
-      this.sortAttribute = attribute;
+      if (attribute === this.sortAttribute) {
+        this.sortOrder = this.sortOrder * -1;
+      } else {
+        this.sortOrder = 1;
+        this.sortAttribute = attribute;
+      }
     }
   }
 };
